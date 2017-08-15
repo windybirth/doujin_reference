@@ -11,6 +11,7 @@ public class App {
 
     public static void main(String[] args) {
         // set root url
+        // TODO read from conf file
         CommonParam.setRootPageUrl(args[0]);
         
         ResolveEPage resolveEPage = new ResolveEPage();

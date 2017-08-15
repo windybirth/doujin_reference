@@ -20,6 +20,7 @@ public class DownloadPic {
     // TODO 下载失败删除当前文件
     public void downloadPicByUrlList(List<String> picUrlList, String folderName) {
         log.writeLog("Get " + picUrlList.size() + " image urls.\n Download Start...");
+        // TODO manage file path in conf file
         File folder = new File(folderName);
         if (!folder.exists() || !folder.isDirectory()) {
             folder.mkdir();

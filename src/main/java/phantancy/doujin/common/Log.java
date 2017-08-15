@@ -14,6 +14,7 @@ public class Log {
         classLog = clazz;
     }
 
+    // TODO save log in log file
     public void writeLog(String message) {
         String messageLog = dateFormat.format(new Date()) + " " + classLog.getName() + ": " + message;
         System.out.println(messageLog);

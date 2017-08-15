@@ -112,19 +112,7 @@ public class ResolveEPage {
 
     // ---- COMMON ----
     private Document readPgae(String pageUrl) {
-        int times = 0;
-        while (true) {
-            try {
-                times++;
-                return Jsoup.connect(pageUrl).get();
-            } catch (IOException e) {
-                if (times > 5) {
-                    log.writeLog("Illegal page url: " + pageUrl);
-                    e.printStackTrace();
-                    return null;
-                }
-            }
-        }
+        return StroeCookie.getWithECookies(pageUrl);
     }
 
     private void SavePage(Document doc) {
