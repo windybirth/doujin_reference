@@ -21,7 +21,8 @@ public class DownloadPic {
     public void downloadPicByUrlList(List<String> picUrlList, String folderName) {
         log.writeLog("Get " + picUrlList.size() + " image urls.\n Download Start...");
         // TODO manage file path in conf file
-        File folder = new File(folderName);
+        String rootPath = "D:\\";
+        File folder = new File(rootPath + "\\" + getEnableFolderName(folderName));
         if (!folder.exists() || !folder.isDirectory()) {
             folder.mkdir();
         }
@@ -62,7 +63,7 @@ public class DownloadPic {
                     // 打开连接
                     URLConnection con = url.openConnection();
                     // 设置请求超时为5s
-                    con.setConnectTimeout(500);
+                    con.setConnectTimeout(5000);
                     // 输入流
                     is = con.getInputStream();
 
@@ -76,22 +77,20 @@ public class DownloadPic {
                     while ((len = is.read(bs)) != -1) {
                         os.write(bs, 0, len);
                     }
+                    os.close();
+                    is.close();
                     times += 3;
                 } catch (Exception e) {
                     e.printStackTrace();
-                } finally {
-                    // 完毕，关闭所有链接
-                    try {
-                        os.close();
-                        is.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
                 }
                 if (times > 3) {
                     break;
                 }
             }
         }
+    }
+
+    private String getEnableFolderName(String folderName) {
+        return folderName.replaceAll("[/\\\\:*?<>|]","");
     }
 }
