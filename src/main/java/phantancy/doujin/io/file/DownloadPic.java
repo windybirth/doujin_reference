@@ -18,11 +18,17 @@ public class DownloadPic {
     
     private static final boolean overrideFile = false;
 
-    // TODO 下载失败删除当前文件
+    // TODO remove current file while download fail
     public void downloadPicByUrlList(List<String> picUrlList, String folderName) {
         log.writeLog("Get " + picUrlList.size() + " image urls.\n Download Start...");
         String rootPath = Setting.localSavePath;
-        File folder = new File(rootPath + "\\" + getEnableFolderName(folderName));
+        String folderPath;
+        if (rootPath.isEmpty()) {
+            folderPath = getEnableFolderName(folderName);
+        } else {
+            folderPath = rootPath + "\\" + getEnableFolderName(folderName);
+        }
+        File folder = new File(folderPath);
         if (!folder.exists() || !folder.isDirectory()) {
             folder.mkdir();
         }
@@ -58,22 +64,18 @@ public class DownloadPic {
                 InputStream is = null;
                 OutputStream os = null;
                 try {
-                    // 构造URL
                     URL url = new URL(imageUrl);
-                    // 打开连接
                     URLConnection con = url.openConnection();
-                    // 设置请求超时为5s
+                    // Timeout 5 seconds
                     con.setConnectTimeout(5000);
-                    // 输入流
                     is = con.getInputStream();
 
-                    // 1K的数据缓冲
+                    // 1K buffer
                     byte[] bs = new byte[1024];
-                    // 读取到的数据长度
+                    // read length
                     int len;
-                    // 输出的文件流
                     os = new FileOutputStream(imageFile);
-                    // 开始读取
+                    // start reading
                     while ((len = is.read(bs)) != -1) {
                         os.write(bs, 0, len);
                     }
