@@ -30,6 +30,7 @@ public class Setting {
         } else {
             localSavePath = prop.getProperty("localSavePath");
         }
+        // TODO is not empty
         if (username == null) {
             Log.writeLog("username need to be set in file conf/setting.properties", Setting.class);
             System.exit(1);
