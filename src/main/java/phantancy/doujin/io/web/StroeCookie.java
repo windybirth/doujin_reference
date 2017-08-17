@@ -1,14 +1,9 @@
 package phantancy.doujin.io.web;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.charset.Charset;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 import java.util.Set;
 
 import org.jsoup.Connection;
@@ -17,6 +12,7 @@ import org.jsoup.Connection.Response;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
+import lombok.NonNull;
 import phantancy.doujin.common.Log;
 import phantancy.doujin.param.Setting;
 
@@ -26,7 +22,7 @@ public class StroeCookie {
     
     private static Map<String,String> cookies;
     
-    public static Document getWithECookies(String pageUrl) {
+    public static Document getWithECookies(@NonNull String pageUrl) {
         int times = 0;
         while (true) {
             times++;

@@ -20,6 +20,7 @@ public class DownloadPic {
 
     // TODO remove current file while download fail
     public void downloadPicByUrlList(List<String> picUrlList, String folderName) {
+        log.writeLog(folderName + "Processing start");
         log.writeLog("Get " + picUrlList.size() + " image urls.\n Download Start...");
         String rootPath = Setting.localSavePath;
         String folderPath;
