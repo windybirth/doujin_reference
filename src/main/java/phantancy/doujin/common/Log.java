@@ -8,7 +8,7 @@ public class Log {
 
     private Class<?> classLog = null;
 
-    private DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss.SSS");
+    private static DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss.SSS");
 
     public Log(Class<?> clazz) {
         classLog = clazz;
@@ -16,7 +16,11 @@ public class Log {
 
     // TODO save log in log file
     public void writeLog(String message) {
-        String messageLog = dateFormat.format(new Date()) + " " + classLog.getName() + ": " + message;
+        writeLog(message, classLog);
+    }
+    
+    public static void writeLog(String message, Class<?> clazz) {
+        String messageLog = dateFormat.format(new Date()) + " " + clazz.getName() + ": " + message;
         System.out.println(messageLog);
     }
 }

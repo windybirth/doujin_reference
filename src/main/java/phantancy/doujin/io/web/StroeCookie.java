@@ -2,7 +2,6 @@ package phantancy.doujin.io.web;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
@@ -19,6 +18,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 import phantancy.doujin.common.Log;
+import phantancy.doujin.param.Setting;
 
 public class StroeCookie {
 
@@ -49,11 +49,8 @@ public class StroeCookie {
     }
     
     private static void loginE() throws IOException {
-        // TODO make a prop class
-        Properties prop = new Properties();
-        prop.load(new FileInputStream(new File("conf/info.properties")));
-        String username = prop.getProperty("username");
-        String password = prop.getProperty("password");
+        String username = Setting.username;
+        String password = Setting.password;
         // set post data in map
         Map<String,String> map = new HashMap<String,String>();
         map.put("CookieDate", "1");

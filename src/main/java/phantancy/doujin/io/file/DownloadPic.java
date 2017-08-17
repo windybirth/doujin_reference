@@ -10,6 +10,7 @@ import java.net.URLConnection;
 import java.util.List;
 
 import phantancy.doujin.common.Log;
+import phantancy.doujin.param.Setting;
 
 public class DownloadPic {
 
@@ -20,8 +21,7 @@ public class DownloadPic {
     // TODO 下载失败删除当前文件
     public void downloadPicByUrlList(List<String> picUrlList, String folderName) {
         log.writeLog("Get " + picUrlList.size() + " image urls.\n Download Start...");
-        // TODO manage file path in conf file
-        String rootPath = "D:\\";
+        String rootPath = Setting.localSavePath;
         File folder = new File(rootPath + "\\" + getEnableFolderName(folderName));
         if (!folder.exists() || !folder.isDirectory()) {
             folder.mkdir();
