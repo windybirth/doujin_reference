@@ -3,6 +3,8 @@ package phantancy.doujin.param;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.charset.Charset;
 import java.util.Properties;
 
 import phantancy.doujin.common.Log;
@@ -18,7 +20,8 @@ public class Setting {
     static {
         Properties prop = new Properties();
         try {
-            prop.load(new FileInputStream(new File("conf/setting.properties")));
+        	FileInputStream input = new FileInputStream(new File("conf/setting.properties"));
+            prop.load(new InputStreamReader(input, Charset.forName("UTF-8")));
         }catch (IOException e) {
             e.printStackTrace();
             System.exit(1);
